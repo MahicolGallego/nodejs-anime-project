@@ -1,1 +1,2 @@
-require("./src/app.js")
+import "./src/app.js"
+// require("./src/app.js")
