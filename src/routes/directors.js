@@ -38,3 +38,42 @@ routerDirectors.get("/:id", async (req, res) => {
 
     res.status(200).json(directorFound);
 })
+
+routerDirectors.put("/:id", async (req, res) => {
+  const animesIndustry = await readFileFs(pathToDBFile);
+  const indexDIrector = animesIndustry.directors.findIndex(
+    (d) => d.id === parseInt(req.params.id)
+  );
+
+  if (!indexDIrector)
+    return res.status(404).json({ message: "Director no encontrado" });
+
+  const updateDirector = {
+    ...animesIndustry.directors[indexDIrector],
+    name: req.body.name,
+  };
+
+  animesIndustry.directors[indexStudio] = updateDirector;
+
+  await writeFileFs(pathToDBFile, animesIndustry);
+
+  res
+    .status(200)
+    .json({ message: "Director actualizado exitosamente", director: updateDirector});
+});
+
+routerStudios.delete("/:id", async (req, res) => {
+  const animesIndustry = await readFileFs(pathToDBFile);
+  const indexDIrector = animesIndustry.directors.findIndex(
+    (d) => d.id == parseInt(req.params.id)
+  );
+
+  if (!indexDIrector)
+    return res.status(404).json({ message: "Director no encontrado" });
+
+  animesIndustry.directors.splice(indexDIrector, 1);
+
+  await writeFileFs(pathToDBFile, animesIndustry);
+
+  res.status(200).json("Director eliminado exitosamente");
+});

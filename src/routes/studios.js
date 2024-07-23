@@ -48,7 +48,7 @@ routerStudios.put("/:id", async (req, res) => {
 
     animesIndustry.studios[indexStudio] = updateSudio
 
-    await writeFileFs(pathToDBFile, animeIndustry)
+    await writeFileFs(pathToDBFile, animesIndustry)
 
     res.status(200).json({ message: "Studio actualizado exitosamente", studio: updateSudio });
     
@@ -56,7 +56,7 @@ routerStudios.put("/:id", async (req, res) => {
 
 routerStudios.delete("/:id", async (req, res) => {
     const animesIndustry = await readFileFs(pathToDBFile);
-    const indexStudio = animeIndustry.studios.findIndex((s) => s.id == parseInt(req.params.id));
+    const indexStudio = animesIndustry.studios.findIndex((s) => s.id == parseInt(req.params.id));
 
     if (!indexStudio) return res.status(404).json({ message: "Studio no encontrado" })
     

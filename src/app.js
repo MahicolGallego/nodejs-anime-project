@@ -4,6 +4,7 @@ import errorHandler from "./middlewares/error.handler.js";
 import { routerAnimes } from "./routes/animes.js";
 import { routerDirectors } from "./routes/directors.js";
 import { routerStudios } from "./routes/studios.js";
+import { routerCharacters } from "./routes/characters.js";
 
 const app = express();
 //Para poder usar las variables de entorno
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/animes", routerAnimes);
 app.use("/studios", routerStudios)
 app.use("/directors", routerDirectors)
+app.use("/characters", routerCharacters)
 app.use(errorHandler)
 
 app.listen(PORT, () => {
